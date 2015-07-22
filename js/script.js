@@ -1,6 +1,8 @@
 function submitAnswers(){
-	var respuestasTotales = 5;
+	var respuestasTotales = 4;
 	var puntuaje = 0;
+	var respuestas = ['b','a','a','c'];
+
 	//Capturando respuestas del usuario
 	var q1 = document.forms["cuestionario"]["q1"].value;
 	var q2 = document.forms["cuestionario"]["q2"].value;
@@ -8,29 +10,24 @@ function submitAnswers(){
 	var q4 = document.forms["cuestionario"]["q4"].value;
 	
 	//validacion que esten respondidas las 4 preguntas
-	for(i = 1; 1 <= respuestasTotales; i++){
-		if(eval("q"+i) == null || eval("q"+i) == ""){
+	for(i = 1; i <= respuestasTotales; i++){
+		if(eval('q'+i) == null || eval('q'+i) == ""){
 			alert("No has respondido la pregunta"+" "+ i);
 			return false;
 		}
 	}
 
 	//validacion respuestas correctas
-	var respuestas = ["b","a","a","c"];
-	if(q1 == respuestas[0]){
-		puntuaje++;
-	}
-	if(q2 == respuestas[1]){
-		puntuaje++;
-	}
-	if(q3 == respuestas[2]){
-		puntuaje++;
-	}
-	if(q4 == respuestas[3]){
-		puntuaje++;
+	for(i = 1; i <= respuestasTotales; i++){
+		if(eval('q'+i) == respuestas[i - 1]){
+			puntuaje++;
+		}
 	}
 
-	alert(puntuaje);
-
+	//mostrando respuestas correctas
+	var resultados = document.getElementById('resultados');
+	resultados.innerHTML = "<h3>Obtuviste "+ puntuaje+" de 4 preguntas</h3>"
+	alert("Has respondido "+puntuaje+" de 4 preguntas de manera correcta");
+	
 	return false;
 }
